@@ -13,7 +13,7 @@ tags:
     description: Auth operations.
 servers:
   - url: http://localhost:3000
-  - url: https://mongodb-p96a.onrender.com
+  - url: https://nodejs-mongodb-p96a.onrender.com
 paths:
   /contacts:
     get:
