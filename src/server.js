@@ -17,7 +17,15 @@ export const setupServer = () => {
 
   app.use(express.json());
 
-  app.use(cors());
+  // Налаштування CORS з явно вказаним origin
+  app.use(
+    cors({
+      origin: 'https://mongodb-p96a.onrender.com', // заміни на свій фронтенд домен або '*'
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      credentials: true, // якщо використовуєш кукі
+    }),
+  );
+
   app.use(cookieParser());
 
   app.use(
@@ -28,10 +36,19 @@ export const setupServer = () => {
     }),
   );
 
+  // Логування заголовків відповіді (для дебагу, можна видалити пізніше)
+  app.use((req, res, next) => {
+    res.on('finish', () => {
+      console.log('Response Headers:', res.getHeaders());
+    });
+    next();
+  });
+
+  // Статичні файли
   app.use('/uploads', express.static(UPLOAD_DIR));
 
   app.use(router);
-  app.use('uploads', express.static(UPLOAD_DIR));
+
   app.use('/api-docs', swaggerDocs());
 
   app.use('*', notFoundHandler);
