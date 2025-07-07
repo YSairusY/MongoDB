@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://nodejs-mongodb-p96a.onrender.com"
+      "url": "https://mongodb-p96a.onrender.com"
     },
     {
       "url": "http://localhost:3000"
